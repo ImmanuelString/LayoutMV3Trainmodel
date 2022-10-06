@@ -7,6 +7,7 @@ import logging
 import os
 
 def data_preprocessing(inference_out):
+    print(type(inference_out))
     predicted_data = inference_out[0].get('output')
 
     invoice_number = ''
@@ -41,6 +42,7 @@ if __name__ == "__main__":
         context = {"model_dir": args.model_path}
         inference_out = handle(inference_batch,context)
         invoice_number,invoice_date,po_number,invoice_amount,itemdetails = data_preprocessing(inference_out)
+        print(invoice_number,invoice_date,po_number,invoice_amount,itemdetails)
         pdftoxml_maker(invoice_number,invoice_date,po_number,invoice_amount, itemdetails)
     except Exception as err:
         os.makedirs('log', exist_ok=True)

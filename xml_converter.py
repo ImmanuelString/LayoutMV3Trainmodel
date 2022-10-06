@@ -95,6 +95,7 @@ class ExtEDInvMessages:
 def pdftoxml_maker(invoice_number, invoice_date, po_number, invoice_amount, itemdetails):
     """pdf to xml maker"""
     try:
+        print('Start XML Process')
         now = datetime.now()
         timestamp = datetime.timestamp(now)
         timestamparr = str(timestamp).split('.')
@@ -137,9 +138,9 @@ def pdftoxml_maker(invoice_number, invoice_date, po_number, invoice_amount, item
         extEdi.ediforwardrec = edifwr
 
         try:
-            invoicedate = pd.to_datetime(invoicedate).strftime('%Y-%m-%d')
+            invoicedate = pd.to_datetime(invoice_date).strftime('%Y-%m-%d')
         except:
-            invoicedate = invoicedate
+            invoicedate = invoice_date
 
         edihder.RecordType = '00'
         edihder.DocumentDate = invoicedate

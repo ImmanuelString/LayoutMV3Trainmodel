@@ -179,10 +179,11 @@ class ModelHandler(object):
         print(inference_out, 'inferhandle-json179')
         with open('LayoutlMV3InferenceOutput.json', 'w') as inf_out:
             inf_out.write(inference_out)
-        inference_out_list = json.loads(inference_out)
-        flattened_output_list = get_flattened_output(inference_out_list)
-        for i, flattened_output in enumerate(flattened_output_list):
-            annotate_image(data['image_path'][i], flattened_output)
+        return inference_out
+        # inference_out_list = json.loads(inference_out)
+        # flattened_output_list = get_flattened_output(inference_out_list)
+        # for i, flattened_output in enumerate(flattened_output_list):
+        #     annotate_image(data['image_path'][i], flattened_output)
             
 
 

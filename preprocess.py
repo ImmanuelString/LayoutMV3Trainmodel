@@ -34,7 +34,7 @@ def get_zip_dir_name():
         os.chdir('/content/data')
         dir_list = os.listdir()
         any_file_name = dir_list[0]
-        zip_dir_name = any_file_name[:any_file_name.find('\\')]
+        zip_dir_name = any_file_name # any_file_name[:any_file_name.find('\\')]
         if all(list(map(lambda x: x.startswith(zip_dir_name), dir_list))):
             return zip_dir_name
         return False
@@ -59,14 +59,14 @@ if __name__ == '__main__':
 
     os.makedirs(args.output_path, exist_ok=True)
     files = {}
-    zip_dir_name = get_zip_dir_name()
+    zip_dir_name = get_zip_dir_name() 
     if zip_dir_name:
         files['train_box'] = read_text_file(os.path.join(
-            os.curdir, 'data', f'{zip_dir_name}\\{zip_dir_name}_box.txt'))
+            os.curdir, 'data', f'{zip_dir_name}/{zip_dir_name}_box.txt'))
         files['train_image'] = read_text_file(os.path.join(
-            os.curdir, 'data', f'{zip_dir_name}\\{zip_dir_name}_image.txt'))
+            os.curdir, 'data', f'{zip_dir_name}/{zip_dir_name}_image.txt'))
         files['train'] = read_text_file(os.path.join(
-            os.curdir, 'data', f'{zip_dir_name}\\{zip_dir_name}.txt'))
+            os.curdir, 'data', f'{zip_dir_name}/{zip_dir_name}.txt'))
     else:
         for f in os.listdir():
             if f.endswith('.txt') and f.find('box') != -1:
@@ -96,7 +96,7 @@ if __name__ == '__main__':
         bboxes.append([box.split('\t')[1].replace('\n', '')
                       for box in files['train_box'][rows[0]:rows[-1]+1]])
         if zip_dir_name:
-            image_path.append(f"/content/data/{zip_dir_name}\\{image}")
+            image_path.append(f"/content/data/{zip_dir_name}/{image}")
         else:
             image_path.append(f"/content/data/{image}")
 
